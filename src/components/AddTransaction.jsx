@@ -1,17 +1,28 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const AddTransaction = () => {
   const [transDesc, setTransDesc] = useState();
   const [transAmount, setTransAmount] = useState();
-  const [trans, setTrans] = useState([]);
+  const [id, setId] = useState(1);
+  // const [trans, setTrans] = useState([]);
+
+  // const curr = new Date();
+  // const time = new curr.getTime();
+  // console.log({ curr });
+  // console.log({ time });
+  var change = id;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setId((change += 1));
+    setTransDesc("");
+    setTransAmount("");
+    // console.log({ id });
     let storedData = JSON.parse(localStorage.getItem("transaction")) || [];
-    console.log("stored data", storedData);
+    // console.log("stored data", storedData);
 
-    const body = { transDesc, transAmount };
-    console.log("new data", body);
+    const body = { id, transDesc, transAmount };
+    // console.log("new data", body);
     const payload = storedData.concat(body);
 
     console.log({ payload });
@@ -47,6 +58,7 @@ const AddTransaction = () => {
                 borderRadius: "3px",
                 fontSize: "14px",
               }}
+              required
             />
             <input
               type="number"
@@ -62,6 +74,7 @@ const AddTransaction = () => {
                 borderRadius: "3px",
                 fontSize: "14px",
               }}
+              required
             />
           </div>
           <button
