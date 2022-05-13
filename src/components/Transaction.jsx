@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const Transaction = ({ transactions }) => {
-  //   console.log({ transactions });
+  //   console.log(typeof transactions);
 
   //   const [temp, setTemp] = useState();
   const [transactionHistory, setTransactionHistory] = useState([]);
@@ -13,11 +13,15 @@ const Transaction = ({ transactions }) => {
     // setTemp(transactions);
   }, []);
 
-  const deleteTrans = (e) => {
-    console.log({ e });
+  const deleteTrans = (id) => {
+    console.log({ id });
     // console.log({ temp });
-    transactions.filter((t) => t.id !== e);
-    localStorage.setItem("transaction", JSON.stringify(transactions));
+    // transactionHistory.splice(id, 1);
+    const filtered = transactionHistory.filter((t) => t.id !== id);
+    console.log({ filtered });
+    // setTransactionHistory(filtered);
+
+    localStorage.setItem("transaction", JSON.stringify(filtered));
   };
 
   //   const sign = transactions.transAmount < 0 ? "-" : "+";
