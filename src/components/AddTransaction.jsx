@@ -2,30 +2,30 @@ import React, { useState } from "react";
 
 const AddTransaction = () => {
   const [transDesc, setTransDesc] = useState();
-  const [transAmount, setTransAmount] = useState();
-  const [id, setId] = useState(1);
-  // const [trans, setTrans] = useState([]);
+  const [transAmount, setTransAmount] = useState(0);
+  // const [id, setId] = useState(1);
 
-  // const curr = new Date();
-  // const time = new curr.getTime();
-  // console.log({ curr });
-  // console.log({ time });
-  var change = id;
+  // var change = id;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setId((change += 1));
+    // setId((change += 1));
     setTransDesc("");
     setTransAmount("");
     // console.log({ id });
     let storedData = JSON.parse(localStorage.getItem("transaction")) || [];
     // console.log("stored data", storedData);
 
-    const body = { id, transDesc, transAmount };
+    const body = {
+      id: Math.floor(Math.random() * 100000000),
+      transDesc,
+      transAmount,
+    };
     // console.log("new data", body);
     const payload = storedData.concat(body);
-
     console.log({ payload });
+    // console.log("added");
+
     localStorage.setItem("transaction", JSON.stringify(payload));
 
     // var storedData = JSON.parse(localStorage.getItem("transaction"));

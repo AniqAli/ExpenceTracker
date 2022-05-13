@@ -1,50 +1,36 @@
 import React, { useEffect, useState } from "react";
+import Transaction from "./Transaction";
 
 const TransactionHistory = () => {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState();
 
   useEffect(() => {
     const data = JSON.parse(localStorage.getItem("transaction"));
-    // console.log({ data });
+    // console.log(typeof data);
     setTransactions(data);
   }, []);
 
-  const deleteTrans = (e) => {
-    console.log({ e });
-    transactions.splice(e, 1);
-    localStorage.setItem("transaction", JSON.stringify(transactions));
-  };
+  // const deleteTrans = (e) => {
+  //   console.log({ e });
+  //   transactions.splice(e, 1);
+  //   localStorage.setItem("transaction", JSON.stringify(transactions));
+  // };
 
   return (
     <>
       <div style={{ padding: "2rem" }}>
         <h2>Transaction History</h2>
         <hr />
-        {/* <div
-          key={i}
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            backgroundColor: "lightgray",
-            padding: "0 1rem",
-          }}
-        >
-          <p>{trans.transDesc}</p>
-          <p>{trans.transAmount}</p>
-          <button
-            style={{
-              backgroundColor: "red",
-              color: "whitesmoke",
-              margin: "10px 1px",
-              border: "none",
-              borderRadius: "3px",
-              cursor: "pointer",
-            }}
-          >
-            Delete
-          </button>
-        </div> */}
-        <table style={{ width: "100%" }}>
+        <ul>
+          {!transactions ? (
+            <p>No Records Found.</p>
+          ) : (
+            transactions.map((trans) => (
+              <Transaction key={trans.id} transactions={trans} />
+            ))
+          )}
+        </ul>
+        {/* <table style={{ width: "100%" }}>
           <thead>
             <tr>
               <th>Description</th>
@@ -82,7 +68,7 @@ const TransactionHistory = () => {
               })
             )}
           </tbody>
-        </table>
+        </table> */}
       </div>
     </>
   );

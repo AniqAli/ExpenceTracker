@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 
 const Balance = () => {
   const [totalAmount, setTotalAmount] = useState();
+  const [expense, setExpense] = useState();
 
   useEffect(() => {
     // getting data from localStorage
     const data = JSON.parse(localStorage.getItem("transaction"));
     // extracting amount from data
-    const amount = data.map((e) => e.transAmount);
+    const amount = !data ? [] : data.map((e) => parseInt(e.transAmount));
     // console.log({ amount });
     // converting string array to number array
     const numArr = [];
@@ -21,6 +22,14 @@ const Balance = () => {
     }, 0);
     console.log({ filtered });
     setTotalAmount(filtered);
+
+    // calculating expense from amount
+    const exp =
+      amount
+        .filter((item) => item < 0)
+        .reduce((acc, item) => (acc += item), 0) * -1;
+    console.log({ exp });
+    setExpense(exp);
   }, []);
 
   return (
@@ -59,7 +68,7 @@ const Balance = () => {
             }}
           >
             <h4>Expense:</h4>
-            <h4>0</h4>
+            <h4>{expense}</h4>
           </div>
         </div>
       </div>
