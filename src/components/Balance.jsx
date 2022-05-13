@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 
 const Balance = () => {
   const [totalAmount, setTotalAmount] = useState();
+  const [income, setIncome] = useState();
   const [expense, setExpense] = useState();
 
   useEffect(() => {
@@ -22,6 +23,13 @@ const Balance = () => {
     }, 0);
     console.log({ filtered });
     setTotalAmount(filtered);
+
+    // calculating expense from amount
+    const inc = amount
+      .filter((item) => item > 0)
+      .reduce((acc, item) => (acc += item), 0);
+    console.log({ inc });
+    setIncome(inc);
 
     // calculating expense from amount
     const exp =
@@ -56,7 +64,7 @@ const Balance = () => {
             }}
           >
             <h4>Income:</h4>
-            <h4>{totalAmount}</h4>
+            <h4>{income}</h4>
           </div>
           <div
             style={{

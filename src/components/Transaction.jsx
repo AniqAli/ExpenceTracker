@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import del from "../delete.png";
 
 const Transaction = ({ transactions }) => {
   //   console.log(typeof transactions);
@@ -19,9 +20,11 @@ const Transaction = ({ transactions }) => {
     // transactionHistory.splice(id, 1);
     const filtered = transactionHistory.filter((t) => t.id !== id);
     console.log({ filtered });
-    // setTransactionHistory(filtered);
+    setTransactionHistory(filtered);
 
+    // setTransactionHistory(
     localStorage.setItem("transaction", JSON.stringify(filtered));
+    // );
   };
 
   //   const sign = transactions.transAmount < 0 ? "-" : "+";
@@ -43,16 +46,16 @@ const Transaction = ({ transactions }) => {
             <td>
               <button
                 style={{
-                  backgroundColor: "red",
-                  color: "whitesmoke",
-                  margin: "10px 1px",
+                  background: "none",
+                  //   color: "whitesmoke",
+                  //   margin: "10px 1px",
                   border: "none",
                   borderRadius: "3px",
                   cursor: "pointer",
                 }}
                 onClick={() => deleteTrans(transactions.id)}
               >
-                Delete
+                <img src={del} width="20px" height="20px" alt="" />
               </button>
             </td>
           </tr>

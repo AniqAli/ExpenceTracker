@@ -14,7 +14,7 @@ function App() {
           width: "500px",
           marginLeft: "auto",
           marginRight: "auto",
-          padding: "1rem 2rem",
+          padding: "0.5rem 2rem",
           backgroundColor: "lightsteelblue",
         }}
       >

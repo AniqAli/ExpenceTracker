@@ -18,10 +18,14 @@ const TransactionHistory = () => {
 
   return (
     <>
-      <div style={{ padding: "2rem" }}>
+      <div
+        style={{
+          padding: "0.5rem",
+        }}
+      >
         <h2>Transaction History</h2>
         <hr />
-        <ul>
+        <ul style={{ height: "30vh", overflowY: "auto" }}>
           {!transactions ? (
             <p>No Records Found.</p>
           ) : (
